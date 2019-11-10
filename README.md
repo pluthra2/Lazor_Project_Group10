@@ -42,7 +42,7 @@ The axes are : horizontal direction is the x axis and vertical deriction is the 
 The lazor_path checks if for the the given placement of blocks all the lazors hit all the sinks/ holes or not. As soon as it comes across the right grid, the simulation stops and it prints out the correct grid which is the solution to the board.
 
 <p align="center">
-   <b> Yeah we solved it!! </b>
+   <strong> Yeah we solved it!! </strong>
  </p>
 
 
@@ -54,13 +54,13 @@ Your board should be solved in a maximum of 2 min. Bigger or more complicated bo
 
 ### What we did in these 3 weeks : 
 
-The tough board so given - 
- - -Image comes here text: ![alt test](...)
+The tough board so given - <br>
+ --Image comes here text: ![alt test](...)
 
-The solution we present -
+The solution we present - <br>
  -- Image comes here text: ![alt test](...)
 ### If your are still confused then Contact :
 
-Charan S. Pasupuleti : spasupu1@jh.edu ,  spasupu1 \
-Prabhjot K. Luthra : pluthra2@.jh.edu , pluthra2 \
+Charan S. Pasupuleti : spasupu1@jh.edu ,  spasupu1 <br>
+Prabhjot K. Luthra : pluthra2@.jh.edu , pluthra2 <br>
 Wayne D. Monteiro : wmontei@jh.edu , waynemonteiro97
