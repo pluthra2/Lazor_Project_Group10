@@ -26,7 +26,7 @@ Once you've made your .bff file use the (insert final file name here) to solve i
 
 The way the code solves a particular board is as such:
 
-We designed a grid for a given board, with each block in the board being a middle point on the block in a grid (like a block surrounded by x's). \
+We designed a grid for a given board, with each block in the board being a middle point on the block in a grid (like a block surrounded by x's). 
 
 x x x \
 x o x \
