@@ -58,7 +58,7 @@ The toughest board so given - <br>
 ![alt test](Original_board_GP.png)
 
 The solution we present - <br>
-![alt test](Solution_board_Gp.png)
+![alt test](Solution_board_GP.png)
 ### If your are still confused then Contact :
 
 Charan S. Pasupuleti : spasupu1@jh.edu ,  spasupu1 <br>
