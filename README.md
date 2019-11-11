@@ -1,4 +1,6 @@
-
+```marquee 
+## *** Welcome to the CPW Lazor App Solver ***
+```
 Here we will attempt to solve the toughest boards you dare to throw at us with our humble yet efficient code.
 
 
