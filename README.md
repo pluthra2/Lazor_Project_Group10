@@ -13,9 +13,9 @@ The .bff file should contain:
 2. The position of blocks and empty movable positions in a grid form
 3. Number and types of blocks where:
 
-A - fixed reflect block 
-B - fixed opaque block
-C - fixed refract block
+A - Reflect block 
+B - Opaque block
+C - Refract block
 L - Laser coordinates (origin and direction) 
 P - Hole/sink coordinates
 ```
@@ -55,10 +55,10 @@ Your board should be solved in a maximum of 2 min. Bigger or more complicated bo
 ### What we did in these 3 weeks : 
 
 The tough board so given - <br>
- --Image comes here text: ![alt test](...)
+![alt test](Board_for_Girpages.png)
 
 The solution we present - <br>
- -- Image comes here text: ![alt test](...)
+![alt test](Board_soln_Gitpages.png)
 ### If your are still confused then Contact :
 
 Charan S. Pasupuleti : spasupu1@jh.edu ,  spasupu1 <br>
