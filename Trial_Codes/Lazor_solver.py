@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Oct 31 17:49:16 2019
+'''
+Lazor Solver
+Prabhjot Kaur Luthra
+'''
 
-@author: Wayne Monteiro
-"""
 
 def next_step(grid, pos, direc):
     x = pos[0]
@@ -232,145 +231,8 @@ if __name__ == "__main__":
     direc2 = (-1, -1)
     hole = [[5,0], [2,5]]
     '''
-    # Trial for Grid 8 with single Lazor, mutiple holes, 2 types of Blocks (A and B) 'Yarn 5'
-    '''
-
-    grid = []
-    for i in range(13):
-        grid.append([])
-        for j in range(11):
-            grid[i].append('x')
-    for i in range(6):
-        for j in range(5):
-            grid[2 * i + 1][2 * j + 1] = 'o'
-    grid[1][3] = 'b'
-    grid[1][5] = 'x'
-    grid[3][3] = 'a'
-    grid[5][1] = 'a'
-    grid[5][9] = 'a'
-    grid[7][5] = 'a'
-    grid[9][1] = 'a'
-    grid[9][9] = 'a'
-    grid[11][1] = 'b'
-    grid[11][3] = 'a'
-    grid[11][7] = 'a'
-    grid[5][3] = 'x'
-    grid[7][3] = 'x'
-    grid[7][9] = 'x'
-    grid[9][5] = 'x'
-    grid[9][7] = 'x'
-    grid[11][5] = 'x'
-    origin1 = (4, 1)
-    direc1 = (1, 1)
-    hole = [[9,2], [6,9]]
-    '''
-    # Trial for Grid 9 with single Lazor, mutiple holes, 3 types of Blocks (A and B and C) 'Yarn 5'
-    '''
-
-    grid = []
-    for i in range(7):
-        grid.append([])
-        for j in range(7):
-            grid[i].append('x')
-    for i in range(3):
-        for j in range(3):
-            grid[2 * i + 1][2 * j + 1] = 'o'
-    grid[1][1] = 'a'
-    grid[1][3] = 'b'
-    grid[3][5] = 'a'
-    grid[5][1] = 'a'
-    grid[5][3] = 'c'
-    origin1 = (4, 5)
-    direc1 = (1, -1)
-    hole = [[6,3], [1,2]]
-    '''
-    # Trial for Grid 10 with single Lazor, one hole, 2 types of Blocks (A and B) 'Showstopper-4'
-    '''
-
-    grid = []
-    for i in range(7):
-        grid.append([])
-        for j in range(7):
-            grid[i].append('x')
-    for i in range(3):
-        for j in range(3):
-            grid[2 * i + 1][2 * j + 1] = 'o'
-    grid[1][1] = 'b'
-    grid[1][3] = 'a'
-    grid[1][5] = 'b'
-    grid[3][1] = 'b'
-    grid[3][5] = 'a'
-    grid[5][1] = 'a'
-    grid[5][5] = 'b'
-    origin1 = (3, 6)
-    direc1 = (-1, -1)
-    hole = [[2,3]]
-    '''
-    # Trial for Grid 11 with 2 Lazors, mutiple holes, 1 type of Blocks (A) 'Mad-7'
-    '''
-
-    grid = []
-    for i in range(11):
-        grid.append([])
-        for j in range(11):
-            grid[i].append('x')
-    for i in range(5):
-        for j in range(5):
-            grid[2 * i + 1][2 * j + 1] = 'o'
-    grid[1][5] = 'a'
-    grid[3][7] = 'a'
-    grid[5][1] = 'a'
-    grid[5][5] = 'a'
-    grid[7][7] = 'a'
-    grid[9][5] = 'a'
-    grid[5][9] = 'x'
-    origin1 = (2, 1)
-    direc1 = (1, 1)
-    origin2 = (9,4)
-    direc2 = (-1, 1)
-    hole = [[6,3], [6,5], [6,7], [9,6], [2,9]]
-    '''
-    # Trial for Grid 12 with 1 Lazors, mutiple holes, 1 type of Blocks (A) 'Mad-4'
-    '''
-
-    grid = []
-    for i in range(11):
-        grid.append([])
-        for j in range(9):
-            grid[i].append('x')
-    for i in range(5):
-        for j in range(4):
-            grid[2 * i + 1][2 * j + 1] = 'o'
-    grid[3][3] = 'a'
-    grid[5][1] = 'a'
-    grid[7][3] = 'a'
-    grid[7][7] = 'a'
-    grid[7][7] = 'a'
-    grid[9][5] = 'a'
-    origin1 = (7, 2)
-    direc1 = (-1, 1)
-    hole = [[7,4], [3,4], [5,8]]
-    '''
-    # Trial for Grid 13 with 1 Lazors, mutiple holes, 2 type of Blocks (A, C) 'Mad-1'
-    '''
-
-    grid = []
-    for i in range(9):
-        grid.append([])
-        for j in range(9):
-            grid[i].append('x')
-    for i in range(4):
-        for j in range(4):
-            grid[2 * i + 1][2 * j + 1] = 'o'
-    grid[1][5] = 'c'
-    grid[3][7] = 'a'
-    grid[5][1] = 'a'
-    origin1 = (2, 7)
-    direc1 = (1, -1)
-    hole = [[3,0], [4,3], [4,7], [2,5]]
-    '''
-   
-    if lazor_path(grid, [[origin1, direc1]], hole):
+    if lazor_path(grid, [[origin1, direc1], [origin2, direc2]], hole):
         print("Congo")
     else:
         print("Try again")
+
