@@ -82,6 +82,8 @@ def GUI_board(original_board, solution_board, filename,
     This function is to generate the given and solution board as an image
     Once you run this code the images are saved as
     "file_name_originalboard.png" and "file_name_solution.png"
+    The idea of the code is extracted from the maze generation challenge 
+    given in the software carpentry class.
     *** Parameters ***
     original_board : List of Lists - That hold the board given in .bff file
     solution_board : List of Lists - Solution board so generated
