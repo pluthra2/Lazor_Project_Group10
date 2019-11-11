@@ -286,11 +286,14 @@ class Grid():
                 for i in range(length):
                     final_board.append([])
                     for j in range(width):
-                        final_board[i].append(possible_grid[2 * i + 1][2 * j + 1])
+                        final_board[i].append(
+                            possible_grid[2 * i + 1][2 * j + 1])
                         print(possible_grid[2 * i + 1][2 * j + 1], end=' ')
                     print()
-                print("This is the solution grid! OR just check the text file or image so created!")
-                GUI_board(self.board, final_board, filename, self.L, self.H, stack_lazors)
+                print("This is the solution grid!")
+                print("OR just check the text file or image so created!")
+                GUI_board(self.board, final_board,
+                          filename, self.L, self.H, stack_lazors)
                 fname1 = filename.split(".bff")[0]
                 fname = fname1 + "_solution_textfile.txt"
                 f = open(fname, "w+")
@@ -369,11 +372,13 @@ def read_bff(filename):
             '''
             if len(strip_lazor) != 5:
                 raise Exception("Not correct number of lazor origin arguments")
-            if strip_lazor[-2:] not in [["-1","-1"],["1","1"], ["-1","1"], ["1","-1"]]:
+            if strip_lazor[-2:] not in [["-1", "-1"],
+                                        ["1", "1"], ["-1", "1"], ["1", "-1"]]:
                 raise Exception("Your direction for a lazor is not right")
 
             for j in range(1, len(strip_lazor), 2):
-                lazor_ori.append((int(strip_lazor[j]), int(strip_lazor[j + 1])))
+                lazor_ori.append((int(strip_lazor[j]),
+                                  int(strip_lazor[j + 1])))
 
         if len(file_content[i]) != 0 and file_content[i][0] == "P":
             hole.append([int(file_content[i][2]), int(file_content[i][4])])
@@ -481,7 +486,8 @@ def next_step(grid, pos, direc):
         '''
         If y is even then block lies above or below
         '''
-        if grid[y + direc[1]][x].lower() == 'o' or grid[y + direc[1]][x].lower() == 'x':
+        if grid[y + direc[1]][x].lower() == 'o' or (
+                grid[y + direc[1]][x].lower() == 'x'):
             new_dir = direc
         elif grid[y + direc[1]][x].lower() == 'a':
             new_dir = [direc[0], -1 * direc[1]]
@@ -495,7 +501,8 @@ def next_step(grid, pos, direc):
         '''
         If y is odd the block is left or right
         '''
-        if grid[y][x + direc[0]].lower() == 'o' or grid[y][x + direc[0]].lower() == 'x':
+        if grid[y][x + direc[0]].lower() == 'o' or (
+                grid[y][x + direc[0]].lower() == 'x'):
             new_dir = direc
         elif grid[y][x + direc[0]].lower() == 'a':
             new_dir = [-1 * direc[0], direc[1]]
@@ -525,7 +532,9 @@ def boundary_check(grid, pos, direc):
     y = pos[1]
     y_max = len(grid) - 1
     x_max = len(grid[0]) - 1
-    if x < 0 or x > x_max or y < 0 or y > y_max or (x + direc[0]) < 0 or (x + direc[0]) > x_max or (y + direc[1]) < 0 or (y + direc[1]) > y_max:
+    if x < 0 or x > x_max or y < 0 or y > y_max or (x + direc[0]) < 0 or (
+        x + direc[0]) > x_max or (y + direc[1]) < 0 or (
+            y + direc[1]) > y_max:
         return True
     else:
         return False
@@ -545,7 +554,7 @@ def lazor_path(grid, lazors, sinks):
     lazaors - Array: Consisting of origin and direction of each lazor
     sinks - Array : consists of all the hole/sinks points
     ***Returns***
-    Stack_lazors - list of lists: having coordinates the lazor took to 
+    Stack_lazors - list of lists: having coordinates the lazor took to
     reach the hole
     '''
 
@@ -568,12 +577,15 @@ def lazor_path(grid, lazors, sinks):
                     stack_lazors[i].append([lazor_pos, direc])
                 elif len(new_dir) == 2:
                     direc = new_dir
-                    lazor_pos = [lazor_pos[0] + direc[0], lazor_pos[1] + direc[1]]
+                    lazor_pos = [lazor_pos[0] +
+                                 direc[0], lazor_pos[1] + direc[1]]
                     stack_lazors[i].append([lazor_pos, direc])
                 else:
                     direc = new_dir
-                    lazor_pos1 = [lazor_pos[0] + direc[0], lazor_pos[1] + direc[1]]
-                    lazor_pos2 = [lazor_pos[0] + direc[2], lazor_pos[1] + direc[3]]
+                    lazor_pos1 = [lazor_pos[0] +
+                                  direc[0], lazor_pos[1] + direc[1]]
+                    lazor_pos2 = [lazor_pos[0] +
+                                  direc[2], lazor_pos[1] + direc[3]]
                     stack_lazors.append([[lazor_pos1, [direc[0], direc[1]]]])
                     stack_lazors[i].append([lazor_pos2, [direc[2], direc[3]]])
                     lazor_pos = lazor_pos2
@@ -601,7 +613,8 @@ def unit_test():
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x'],
                    ['x', 'B', 'x', 'B', 'x', 'x', 'x'],
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x']]
-    assert read_bff("dark_1.bff") == (grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    assert read_bff("dark_1.bff") == (grid, A_blocks,
+                                      B_blocks, C_blocks, lazors, hole)
     assert lazor_path(solved_grid, lazors, hole)[0] == True
     # Mad_1.bff
     grid = [['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o'],
@@ -620,7 +633,8 @@ def unit_test():
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
                    ['x', 'o', 'x', 'o', 'x', 'o', 'x', 'o', 'x'],
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x']]
-    assert read_bff("mad_1.bff") == (grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    assert read_bff("mad_1.bff") == (grid, A_blocks,
+                                     B_blocks, C_blocks, lazors, hole)
     assert lazor_path(solved_grid, lazors, hole)[0] == True
     # Mad_4.bff
     grid = [['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o'],
@@ -641,7 +655,8 @@ def unit_test():
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
                    ['x', 'o', 'x', 'o', 'x', 'A', 'x', 'o', 'x'],
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x']]
-    assert read_bff("mad_4.bff") == (grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    assert read_bff("mad_4.bff") == (grid, A_blocks, B_blocks,
+                                     C_blocks, lazors, hole)
     assert lazor_path(solved_grid, lazors, hole)[0] == True
     # Mad_7.bff
     grid = [['o', 'o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o', 'o'],
@@ -663,7 +678,8 @@ def unit_test():
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
                    ['x', 'o', 'x', 'o', 'x', 'A', 'x', 'o', 'x', 'o', 'x'],
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x']]
-    assert read_bff("mad_7.bff") == (grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    assert read_bff("mad_7.bff") == (grid, A_blocks, B_blocks,
+                                     C_blocks, lazors, hole)
     assert lazor_path(solved_grid, lazors, hole)[0] == True
     # Numbered_6.bff
     grid = [['o', 'o', 'o'], ['o', 'x', 'x'], ['o', 'o', 'o'],
@@ -683,7 +699,8 @@ def unit_test():
                    ['x', 'A', 'x', 'x', 'x', 'o', 'x'],
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x'],
                    ['x', 'B', 'x', 'o', 'x', 'o', 'x']]
-    assert read_bff("numbered_6.bff") == (grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    assert read_bff("numbered_6.bff") == (grid, A_blocks, B_blocks,
+                                          C_blocks, lazors, hole)
     assert lazor_path(solved_grid, lazors, hole)[0] == True
     # Showstopper_4.bff
     grid = [['B', 'o', 'o'], ['o', 'o', 'o'], ['o', 'o', 'o']]
@@ -699,7 +716,8 @@ def unit_test():
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x'],
                    ['x', 'A', 'x', 'o', 'x', 'B', 'x'],
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x']]
-    assert read_bff("showstopper_4.bff") == (grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    assert read_bff("showstopper_4.bff") == (grid, A_blocks, B_blocks,
+                                             C_blocks, lazors, hole)
     assert lazor_path(solved_grid, lazors, hole)[0] == True
     # Tiny_5.bff
     grid = [['o', 'B', 'o'], ['o', 'o', 'o'], ['o', 'o', 'o']]
@@ -715,7 +733,8 @@ def unit_test():
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x'],
                    ['x', 'A', 'x', 'C', 'x', 'o', 'x'],
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x']]
-    assert read_bff("tiny_5.bff") == (grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    assert read_bff("tiny_5.bff") == (grid, A_blocks, B_blocks,
+                                      C_blocks, lazors, hole)
     assert lazor_path(solved_grid, lazors, hole)[0] == True
     # Yarn_5.bff
     grid = [['o', 'B', 'x', 'o', 'o'], ['o', 'o', 'o', 'o', 'o'],
@@ -739,20 +758,23 @@ def unit_test():
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
                    ['x', 'B', 'x', 'A', 'x', 'x', 'x', 'A', 'x', 'o', 'x'],
                    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x']]
-    assert read_bff("yarn_5.bff") == (grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    assert read_bff("yarn_5.bff") == (grid, A_blocks, B_blocks,
+                                      C_blocks, lazors, hole)
     assert lazor_path(solved_grid, lazors, hole)[0] == True
 
 
 if __name__ == "__main__":
-    filename = "yarn_5.bff"
-    board_given, A_blocks, B_blocks, C_blocks, lazors, hole = read_bff(filename)
+    filename = "dark_1.bff"
+    (board_given, A_blocks, B_blocks,
+        C_blocks, lazors, hole) = read_bff(filename)
     print("**** Welcome to the CPW Lazor Solver ****")
     print("Given Board :- ")
     for y in board_given:
         for x in y:
             print(x, end=' ')
         print()
-    print("Type of Blocks given A(reflective) : %d, B(opaque) : %d, C(Refractive) : %d " % (A_blocks, B_blocks, C_blocks))
+    print("Type of Blocks given A(reflective) : %d " % (A_blocks) +
+          "B(opaque) : %d, C(Refractive) : %d " % (B_blocks, C_blocks))
     unit_test()
     time_start = time.time()
     Board = Grid(board_given, A_blocks, B_blocks, C_blocks, lazors, hole)
