@@ -351,7 +351,7 @@ def read_bff(filename):
     '''
     try:
         bff_read = open(filename, "r").read()
-    except:
+    except IOError:
         print("There is no such file")
     file_content = bff_read.strip().split("\n")
 
