@@ -1,5 +1,6 @@
 '''
 ***** Lazor Project 2019 - Software Carpentry *****
+
 Contributors - Charan S. Pasupuleti. , Prabhjot K. Luthra, Wayne D. Moneteiro
 Objective:- The code so written should generate solution for placing the blocks
 in a given board, thus solving the lazor board so given and making lazors
