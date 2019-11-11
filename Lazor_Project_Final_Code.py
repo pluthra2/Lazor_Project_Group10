@@ -1,6 +1,5 @@
 '''
 ***** Lazor Project 2019 - Software Carpentry *****
-
 Contributors - Charan S. Pasupuleti. , Prabhjot K. Luthra, Wayne D. Moneteiro
 Objective:- The code so written should generate solution for placing the blocks
 in a given board, thus solving the lazor board so given and making lazors
@@ -17,7 +16,7 @@ So now it's easy to mathematically have a coordinate system for the grid with
  |
  |
  V
- y 
+ y
  x,y- As the directions for the coordinate system.
  And just like solving a maze, here we increment each of the lazors one step
  at a time, and as it intersects the holes we remove that hole from the list
@@ -62,14 +61,12 @@ def set_color(img, x0, y0, dim, color):
     '''
     This function sets a colour for the pixels in that block
     of the board
-
     *** Parameters ***
     img : CLass Object - Image class object
     x0 : Integer - starting x coordinate
     y0 : Integer -starting y coordinate
     dim : Integer - dimension of the block
     color : String - Color to set the block to
-
     *** Returns ***
     An image with all the pixels assigned with specific colour.
     '''
@@ -85,7 +82,6 @@ def GUI_board(original_board, solution_board, filename,
     This function is to generate the given and solution board as an image
     Once you run this code the images are saved as
     "file_name_originalboard.png" and "file_name_solution.png"
-
     *** Parameters ***
     original_board : List of Lists - That hold the board given in .bff file
     solution_board : List of Lists - Solution board so generated
@@ -96,7 +92,6 @@ def GUI_board(original_board, solution_board, filename,
     stack_lazors - List of Lists - consisting of the lazor path
                                    for each lazor
     blocksize - Integer - Size of the block of the board
-
     *** Returns ***
     Nothing as it saves the boards as images
     '''
@@ -208,7 +203,6 @@ class Grid():
     def __init__(self, board, A_blocks, B_blocks, C_blocks, lazors, hole):
         '''
         Initialises the object of the Class Grid
-
         *** Parameters ***
         self - variable that holds all the data regarding the class object
         board - n*m matrix consisting of some or all of o, x, A, B and C
@@ -220,7 +214,6 @@ class Grid():
         L1 - origin (1,3), direction (-1,-1)
         L2 - origin (2,4), direction (1, -1)
         hole- list of hole points that the lazor has to intersect
-
         *** Returns ***
         Nothing!
         '''
@@ -252,10 +245,8 @@ class Grid():
         with lazor solver function if the generated board is the solution for
         the board so given, The maximum iterations possible and iterations so
         performed are printed.
-
         ** Parameters **
         self - consists of all data (board, A_blocks, B_blocks, C_blocks .. )
-
         ** Returns **
         Nothing!
         '''
@@ -298,7 +289,7 @@ class Grid():
                         final_board[i].append(possible_grid[2 * i + 1][2 * j + 1])
                         print(possible_grid[2 * i + 1][2 * j + 1], end=' ')
                     print()
-                print("This is the solution grid! OR just check the png image created!")
+                print("This is the solution grid! OR just check the text file or image so created!")
                 GUI_board(self.board, final_board, filename, self.L, self.H, stack_lazors)
                 fname1 = filename.split(".bff")[0]
                 fname = fname1 + "_solution_textfile.txt"
@@ -317,7 +308,7 @@ class Grid():
             t2 = time.time()
             if t2 - t1 >= 5:
                 t1 = time.time()
-                b = "....Solving...." * x
+                b = "Solving" + "..." * x
                 print(b, end="\r")
                 if x == 3:
                     x = 0
@@ -331,10 +322,8 @@ def read_bff(filename):
     This file consists all the given information for solving the board
     It consists of the board, number of blocks of type A, B, and C,
     lazors ( with their origin and direction), hole points
-    
     *** Parameters ***
     filename - the name of the bff file
-    
     *** Returns ***
     updated_board - list of lists :board given in the bff file
     A_blocks - integer : Number of blocks of Type A
@@ -456,7 +445,6 @@ def create_grid(grid, permut):
                             x x x x x
         *** Parameters ***
         self - consists of all data (board, A_blocks, B_blocks, C_blocks .. )
-
         *** Returns ***
         a (2n + 1) x (2m +1) matrix (grid) if board size is n x m
     '''
@@ -473,12 +461,10 @@ def next_step(grid, pos, direc):
     '''
     This function is to calculate the next step the lazor will take
     depending on the type of the block it intersects, and its position
-
     *** Parameters ***
     grid - List of lists : consisting of the board on which the lazor moves
     pos - array : current position of the lazor
     direc - array : current direction of the lazor
-
     *** Returns ***
     new_dir = new direction the lazor is taking depending on the type
     of the block it interacts with and its orginal direction
@@ -488,8 +474,6 @@ def next_step(grid, pos, direc):
     * - is the current location of the lazor
     and the 4 coordinates are it are the 4 directions possible
     for the movement of lazor
-
-
     '''
     x = pos[0]
     y = pos[1]
@@ -530,7 +514,6 @@ def boundary_check(grid, pos, direc):
     possible position is within the boundary of the grid or not
     If it is then we can continue with the lazor or else the lazor is dead
     as it crosses the boundary of the board/grid
-
     ** Parameters **
     grid - List of Lists : consisting of the board on which the lazor moves
     pos - Array : Current position of the lazor
@@ -557,12 +540,10 @@ def lazor_path(grid, lazors, sinks):
     from the hole list. As soon as the whole list is empty, the while loop
     breaks and it returns True i.e Solved; else the loop goes on till Maximum
     Iterations are reached.
-
     *** Parameters ***
     grid - List of lists: consisting of the board on which the lazor moves
     lazaors - Array: Consisting of origin and direction of each lazor
     sinks - Array : consists of all the hole/sinks points
-
     ***Returns***
     Stack_lazors - list of lists: having coordinates the lazor took to 
     reach the hole
@@ -763,7 +744,7 @@ def unit_test():
 
 
 if __name__ == "__main__":
-    filename = "numbered_6.bff"
+    filename = "yarn_5.bff"
     board_given, A_blocks, B_blocks, C_blocks, lazors, hole = read_bff(filename)
     print("**** Welcome to the CPW Lazor Solver ****")
     print("Given Board :- ")
