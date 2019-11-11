@@ -1,8 +1,63 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Nov  3 18:06:10 2019
+
+@author: charan
+"""
+
 import time
 import numpy as np
 import random
 import math
 import copy
+from PIL import Image, ImageDraw
+
+
+x = 0
+o = 1
+A = 2
+B = 3
+C = 4
+
+COLORS = {
+    'x': (160, 160, 160),
+    'A': (255, 255, 255),
+    'B': (0, 0, 0),
+    'C': (172, 215, 218),
+    'o': (128, 128, 128),
+    
+}
+
+
+
+def set_color(img, x0, y0, dim, color, h_blocks, w_blocks):
+    for x in range(dim):
+        for y in range(dim):
+            
+            img.putpixel(
+                (dim * x0 + x, dim * y0 + y),
+                color)
+    
+
+
+def save_maze(maze, filename, blockSize=50):
+    name = filename.split('.')
+    a=name[0]
+    w_blocks = len(maze[0])
+    h_blocks = len(maze)
+    print (w_blocks,h_blocks)
+    SIZE = (w_blocks * blockSize, h_blocks * blockSize)
+    img = Image.new("RGB", SIZE, color=COLORS['x'])
+
+    for y, row in enumerate(maze):
+        for x, block_ID in enumerate(row):
+            set_color(img, x, y, blockSize, COLORS[block_ID],h_blocks, w_blocks)
+
+    img.save("%s_solution.png" % (a))
+
+
+
 
 def create_grid(board):
     length = 2 * len(board) + 1
@@ -60,7 +115,7 @@ def read_bff(filename):
     for x in grid: 
         lists = x.split() 
         updated_grid.append(lists)
-    return(updated_grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    return(updated_grid, A_blocks, B_blocks, C_blocks, lazors, hole, filename)
 
 
 def next_step(grid, pos, direc):
@@ -120,7 +175,7 @@ def lazor_path(grid, lazors, sinks):
     while len(sinks) != 0 and ITER <= MAX_ITER:
         # print('Here')
         ITER += 1
-        n = len(stack_lazors)
+#        n = len(stack_lazors)
         for i in range(len(stack_lazors)):
             lazor_pos = list(stack_lazors[i][-1][0])
             direc = list(stack_lazors[i][-1][1])
@@ -150,32 +205,35 @@ def lazor_path(grid, lazors, sinks):
         return False
 
 
-def blocks(board, A_blocks, B_blocks, C_blocks, lazors, hole):
+def blocks(board, A_blocks, B_blocks, C_blocks, lazors, hole, filename):
+    read_bff
     movable_blocks=[]
-    print(board)
     for x in board:
         for y in x :
             if y == 'o':
                 movable_blocks.append(y)
+                
     for i in range(A_blocks):
         movable_blocks[i] = 'A'
     for i in range(A_blocks, (A_blocks+B_blocks)):
         movable_blocks[i] = 'B'
     for i in range((A_blocks+B_blocks), (A_blocks+B_blocks+C_blocks)):
         movable_blocks[i] = 'C'
+        
     MAX_BOARDS = math.factorial(len(movable_blocks))
-    if A_blocks !=  0 :
-        MAX_BOARDS = int(MAX_BOARDS / A_blocks)
+    if A_blocks != 0:
+        MAX_BOARDS = int(MAX_BOARDS / math.factorial(A_blocks))
     if B_blocks != 0:
-        MAX_BOARDS = int(MAX_BOARDS / B_blocks)
+        MAX_BOARDS = int(MAX_BOARDS / math.factorial(B_blocks))
     if C_blocks != 0:
-        MAX_BOARDS = int(MAX_BOARDS / C_blocks)
+        MAX_BOARDS = int(MAX_BOARDS / math.factorial(C_blocks))
     ITER_B = 0
     length=len(board)
     width=len(board[0])
     print(lazors)
     print(hole)
     print(MAX_BOARDS)
+    print ("Solving .............")
     while ITER_B <= MAX_BOARDS:
         sinks = copy.deepcopy(hole)
         permut = copy.deepcopy(movable_blocks)
@@ -194,6 +252,7 @@ def blocks(board, A_blocks, B_blocks, C_blocks, lazors, hole):
             print(lazors)
             print(sinks)
             print("Congo")
+            save_maze(grid, filename)
             for y in grid:
                 for x in y:
                     print(x, end=' ')
@@ -202,10 +261,8 @@ def blocks(board, A_blocks, B_blocks, C_blocks, lazors, hole):
     print(ITER_B)
     
 if __name__ == "__main__":
-    grid, A_blocks, B_blocks, C_blocks, lazors, hole=read_bff("numbered_6.bff")
-    print(lazors)
-    print(hole)
+    grid, A_blocks, B_blocks, C_blocks, lazors, hole, filename=read_bff("mad_7.bff")
     time_start = time.time()
-    blocks(grid, A_blocks, B_blocks, C_blocks, lazors, hole)
+    blocks(grid, A_blocks, B_blocks, C_blocks, lazors, hole, filename)
     time_end = time.time()
     print('run time: %f seconds' %(time_end - time_start))
