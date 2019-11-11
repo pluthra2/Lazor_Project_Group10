@@ -187,7 +187,6 @@ def read_bff(filename):
     C_blocks - integer : Number of blocks of Type C
     lazors - list of lists : List of all lazors with their origin and direction
     hole - list : List of all the hole points
-
     '''
     board = []
     A_blocks = 0
