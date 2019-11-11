@@ -54,7 +54,7 @@ Your board should be solved in a maximum of 2 min. Bigger or more complicated bo
 
 ### What we did in these 3 weeks : 
 
-The tough board so given - <br>
+The toughest board so given - <br>
 ![alt test](Original_board_GP.png)
 
 The solution we present - <br>
