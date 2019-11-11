@@ -59,6 +59,8 @@ The toughest board so given - <br>
 
 The solution we present - <br>
 ![alt test](Solution_board_GP.png)
+
+Master Branch has the final code and a folder "Trial Codes" where we tried different ways to reach the solution board. GUI Branch has all the GUI trial codes and also contains folders for each board containing the given and output files so generated from the code.
 ### If your are still confused then Contact :
 
 Charan S. Pasupuleti : spasupu1@jh.edu ,  spasupu1 <br>
