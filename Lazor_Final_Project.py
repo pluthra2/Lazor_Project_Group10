@@ -251,13 +251,20 @@ def read_bff(filename):
     lazors - list of lists : List of all lazors with their origin and direction
     hole - list : List of all the hole points
     '''
+    split_name = [char for char in filename]
+    if split_name[-4:] != [".", "b", "f", "f"]:
+        raise Exception("File type is not .bff")
     board = []
     A_blocks = 0
     B_blocks = 0
     C_blocks = 0
     lazor_ori = []
     hole = []
-    bff_read = open(filename, "r").read()
+    try:
+        bff_read = open(filename, "r").read()
+
+    except:
+        print("There is no such file")
     file_content = bff_read.strip().split("\n")
 
     for i in range(len(file_content)):
@@ -274,6 +281,12 @@ def read_bff(filename):
             C_blocks = int(file_content[i][2])
         if len(file_content[i]) != 0 and file_content[i][0] == "L":
             strip_lazor = file_content[i].split(" ")
+
+            if len(strip_lazor) != 5:
+                raise Exception("Not correct number of lazor origin arguments")
+            if strip_lazor[-2:] not in [["-1","-1"],["1","1"], ["-1","1"], ["1","-1"]]:
+                raise Exception("Your direction for a lazor is not right")
+
             for j in range(1, len(strip_lazor), 2):
                 lazor_ori.append((int(strip_lazor[j]), int(strip_lazor[j + 1])))
 
@@ -281,11 +294,50 @@ def read_bff(filename):
             hole.append([int(file_content[i][2]), int(file_content[i][4])])
     updated_board = []
     lazors = []
+    
     for i in range(int(len(lazor_ori) / 2)):
         lazors.append([lazor_ori[2 * i], lazor_ori[2 * i + 1]])
     for x in board:
         lists = x.split()
         updated_board.append(lists)
+
+    if len(updated_board) == 0:
+        raise Exception("There is no board in your file")
+    ocount = 0
+    for i in range(len(updated_board)):
+        for j in range(len(updated_board[0])):
+            if updated_board[i][j] == 'o':
+                ocount = ocount + 1
+            if updated_board[i][j].lower() not in ['x', 'o', 'a', 'c','b']:
+                raise Exception("Board has characters other than x and o")
+    print(lazors, hole)    
+    if (A_blocks + B_blocks + C_blocks) > (ocount):
+        raise Exception("There are more blocks than there are movable spaces")
+    if A_blocks == 0 and B_blocks == 0 and C_blocks == 0:
+        raise Exception("Your file has no blocks in it to place")
+    print(len(updated_board[0]),len(updated_board))
+
+    for i in range(len(lazors)):
+        if lazors[i][0][0] > 2 * len(updated_board[0]) or lazors[i][0][0] < 0:
+            print(lazors[i][0][0])
+            raise Exception("A lazor is out of the bounds of the boards")
+    for i in range(len(lazors)):
+        if lazors[i][0][1] > 2 * len(updated_board) or lazors[i][0][0] < 0:
+            print(lazors[i][0][0])
+            raise Exception("A lazor is out of the bounds of the boards")
+    for i in range(len(hole)):
+        if hole[i][0] > 2 * len(updated_board[0]) or hole[i][0] < 0:
+            print(hole[i][0])
+            raise Exception("A hole is out of the bounds of the boards")
+    for i in range(len(hole)):
+        if hole[i][1] > 2 * len(updated_board) or hole[i][0] < 0:
+            print(hole[i][1])
+            raise Exception("A hole is out of the bounds of the boards")
+    if len(lazors) < 1:
+        raise Exception("Not enough lasers")
+    if len(hole) < 1:
+        raise Exception("Not enough holes")
+
     return(updated_board, A_blocks, B_blocks, C_blocks, lazors, hole)
 
 
@@ -597,7 +649,7 @@ def unit_test():
 
 
 if __name__ == "__main__":
-    filename = "dark_1.bff"
+    filename = "mad_7.bff"
     board_given, A_blocks, B_blocks, C_blocks, lazors, hole = read_bff(filename)
     print("**** Welcome to the CPW Lazor Solver ****")
     print("Given Board :- ")
@@ -612,3 +664,4 @@ if __name__ == "__main__":
     Board.blocks(filename)
     time_end = time.time()
     print('Run time: %f seconds' % (time_end - time_start))
+    
