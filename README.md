@@ -55,10 +55,10 @@ Your board should be solved in a maximum of 2 min. Bigger or more complicated bo
 ### What we did in these 3 weeks : 
 
 The tough board so given - <br>
-![alt test](Board_for_Girpages.png)
+![alt test](Original_board_GP.png)
 
 The solution we present - <br>
-![alt test](Board_soln_Gitpages.png)
+![alt test](Solution_board_Gp.png)
 ### If your are still confused then Contact :
 
 Charan S. Pasupuleti : spasupu1@jh.edu ,  spasupu1 <br>
