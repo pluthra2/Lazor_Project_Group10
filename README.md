@@ -19,7 +19,7 @@ C - Refract block
 L - Laser coordinates (origin and direction) 
 P - Hole/sink coordinates
 ```
-Once you've made your .bff file use the (insert final file name here) to solve it. Insert the file name in line (insert line number here).
+Once you've made your .bff file use the "Lazor_Project_Final_Code" to solve it. Insert the file name in line 801.
 
 
 ### How does our method work?
