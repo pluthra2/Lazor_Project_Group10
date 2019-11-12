@@ -64,7 +64,7 @@ The solution we present - <br>
 Master Branch has the final code and a folder "Trial Codes" where we tried different ways to reach the solution board. It also contains folders for each board containing the given and output files so generated from the code. GUI Branch has all the GUI trial codes.
 
 The timeline is as follows 
-![alt test](Lazor_Project_Timeline.png)
+![alt test](Lazor_Project_TimeLine.png)
 ### If you are still confused then Contact :
 
 Charan S. Pasupuleti : spasupu1@jh.edu ,  spasupu1 <br>
