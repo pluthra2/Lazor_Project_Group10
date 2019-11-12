@@ -82,7 +82,7 @@ def GUI_board(original_board, solution_board, filename,
     This function is to generate the given and solution board as an image
     Once you run this code the images are saved as
     "file_name_originalboard.png" and "file_name_solution.png"
-    The idea of the code is extracted from the maze generation challenge 
+    The idea of the code is extracted from the maze generation challenge
     given in the software carpentry class.
     *** Parameters ***
     original_board : List of Lists - That hold the board given in .bff file
@@ -351,22 +351,55 @@ def read_bff(filename):
     '''
     try:
         bff_read = open(filename, "r").read()
-    except IOError:
+    except UnboundLocalError:
         print("There is no such file")
     file_content = bff_read.strip().split("\n")
-
+    start_found = 0
+    stop_found = 0
     for i in range(len(file_content)):
+        if file_content[i] == "":
+            continue
+#        Read in the grid, if no START or STOP raise an error
         if file_content[i] == "GRID START":
             a = i + 1
+            start_found = 1
             while file_content[a] != "GRID STOP":
                 board.append(file_content[a])
                 a = a + 1
-        if len(file_content[i]) == 3 and file_content[i][0] == "A":
-            A_blocks = int(file_content[i][2])
-        if len(file_content[i]) == 3 and file_content[i][0] == "B":
-            B_blocks = int(file_content[i][2])
-        if len(file_content[i]) == 3 and file_content[i][0] == "C":
-            C_blocks = int(file_content[i][2])
+                if file_content[a + 1] == "GRID STOP":
+                    stop_found = 1
+        if file_content[i][0] == "A" and (
+                file_content[i][2] != "x") and file_content[i][2] != "o":
+            A_temp = []
+            if len(file_content[i]) > 3:
+                for j in range(2, len(file_content[i])):
+                    A_temp.append(file_content[i][j])
+                num_str_A = "".join(A_temp)
+                A_blocks = int(num_str_A)
+#                print("A",A_blocks)
+            else:
+                A_blocks = int(file_content[i][2])
+        if file_content[i][0] == "B" and (
+                file_content[i][2]) != "x" and file_content[i][2] != "o":
+            B_temp = []
+            if len(file_content[i]) > 3:
+                for j in range(2, len(file_content[i])):
+                    B_temp.append(file_content[i][j])
+                num_str_B = "".join(B_temp)
+                B_blocks = int(num_str_B)
+            else:
+                B_blocks = int(file_content[i][2])
+        if file_content[i][0] == "C" and (
+                file_content[i][2]) != "x" and file_content[i][2] != "o":
+            C_temp = []
+            if len(file_content[i]) > 3:
+                for j in range(2, len(file_content[i])):
+                    C_temp.append(file_content[i][j])
+                num_str_C = "".join(C_temp)
+                C_blocks = int(num_str_C)
+#                print("C",C_blocks)
+            else:
+                C_blocks = int(file_content[i][2])
         if len(file_content[i]) != 0 and file_content[i][0] == "L":
             strip_lazor = file_content[i].split(" ")
             '''
@@ -374,13 +407,12 @@ def read_bff(filename):
             '''
             if len(strip_lazor) != 5:
                 raise Exception("Not correct number of lazor origin arguments")
-            if strip_lazor[-2:] not in [["-1", "-1"],
-                                        ["1", "1"], ["-1", "1"], ["1", "-1"]]:
+            if strip_lazor[-2:] not in [["-1", "-1"], ["1", "1"], ["-1", "1"], ["1", "-1"]]:
                 raise Exception("Your direction for a lazor is not right")
 
             for j in range(1, len(strip_lazor), 2):
-                lazor_ori.append((int(strip_lazor[j]),
-                                  int(strip_lazor[j + 1])))
+                lazor_ori.append(
+                    (int(strip_lazor[j]), int(strip_lazor[j + 1])))
 
         if len(file_content[i]) != 0 and file_content[i][0] == "P":
             hole.append([int(file_content[i][2]), int(file_content[i][4])])
@@ -402,9 +434,10 @@ def read_bff(filename):
         for j in range(len(updated_board[0])):
             if updated_board[i][j] == 'o':
                 ocount = ocount + 1
-                '''
-                If random characters other than the ones mentioned
-                '''
+
+            '''
+            If random characters other than the ones mentioned
+            '''
             if updated_board[i][j].lower() not in ['x', 'o', 'a', 'c', 'b']:
                 raise Exception("Board has characters other than x and o")
     # If more blocks than movable spaces
@@ -416,26 +449,25 @@ def read_bff(filename):
     # If lazor or hole out of bounds
     for i in range(len(lazors)):
         if lazors[i][0][0] > 2 * len(updated_board[0]) or lazors[i][0][0] < 0:
-            print(lazors[i][0][0])
             raise Exception("A lazor is out of the bounds of the boards")
     for i in range(len(lazors)):
         if lazors[i][0][1] > 2 * len(updated_board) or lazors[i][0][0] < 0:
-            print(lazors[i][0][0])
             raise Exception("A lazor is out of the bounds of the boards")
     for i in range(len(hole)):
         if hole[i][0] > 2 * len(updated_board[0]) or hole[i][0] < 0:
-            print(hole[i][0])
             raise Exception("A hole is out of the bounds of the boards")
     for i in range(len(hole)):
         if hole[i][1] > 2 * len(updated_board) or hole[i][0] < 0:
-            print(hole[i][1])
             raise Exception("A hole is out of the bounds of the boards")
     # If not enough lazors or holes
     if len(lazors) < 1:
-        raise Exception("Not enough lasers")
+        raise Exception("No lasers found")
     if len(hole) < 1:
-        raise Exception("Not enough holes")
-
+        raise Exception("No holes found")
+    if start_found == 0:
+        raise Exception("Start not found")
+    if stop_found == 0:
+        raise Exception("Stop not found")
     return(updated_board, A_blocks, B_blocks, C_blocks, lazors, hole)
 
 
