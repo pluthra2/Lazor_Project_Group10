@@ -1,4 +1,4 @@
-## *** Welcome to the CPW Lazor App Solver ***
+## Welcome to the CPW Lazor App Solver
 
 Here we will attempt to solve the toughest boards you dare to throw at us with our humble yet efficient code.
 
@@ -20,19 +20,20 @@ L - Laser coordinates (origin and direction)
 P - Hole/sink coordinates
 ```
 Once you've made your .bff file use the "Lazor_Project_Final_Code" to solve it. Insert the file name in line 801.
+(For your reference open any board folder in the master branch and use the .bff file for that board as a template)
 
 
 ### How does our method work?
 
 The way the code solves a particular board is as such:
 
-We designed a grid for a given board, with each block in the board being a middle point on the block in a grid (like a block surrounded by x's). 
+We designed a grid for a given board, with each block in the board being a middle point on the block in a grid. 
 <p align="center">
-x x x <br>
-x o x <br>
-x x x <br>
+x x x x x <br>
+x o x A x<br>
+x x x x x<br>
 </p>
-This is one block of the grid portraying one block of the board.
+These are 2 blocks of the grid portraying two blocks of the board (o and A).
 
 
 The Block function in the class Grid will create a random permutation of the available blocks and movable spaces in the grid and give this permuation to the lazor_path function to solve it. 
@@ -60,9 +61,9 @@ The toughest board so given - <br>
 The solution we present - <br>
 ![alt test](Solution_board_GP.png)
 
-Master Branch has the final code and a folder "Trial Codes" where we tried different ways to reach the solution board. GUI Branch has all the GUI trial codes and also contains folders for each board containing the given and output files so generated from the code.
-### If your are still confused then Contact :
+Master Branch has the final code and a folder "Trial Codes" where we tried different ways to reach the solution board. It also contains folders for each board containing the given and output files so generated from the code. GUI Branch has all the GUI trial codes.
+### If you are still confused then Contact :
 
 Charan S. Pasupuleti : spasupu1@jh.edu ,  spasupu1 <br>
 Prabhjot K. Luthra : pluthra2@.jh.edu , pluthra2 <br>
-Wayne D. Monteiro : wmontei@jh.edu , waynemonteiro97
+Wayne D. Monteiro : wmontei1@jh.edu , waynemonteiro97
